@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { RxEnter, RxHamburgerMenu, RxCross2 } from "react-icons/rx";
+import { Link } from 'react-router-dom';
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -19,11 +20,11 @@ export default function Navbar() {
 
           {/* Botão "Abra sua conta" (somente mobile) */}
           <div className="md:hidden">
-            <a href="#abrir_conta">
+            <Link to="/abrir-conta">
               <button className="cursor-pointer bg-gradient-to-r from-orange-400 to-orange-600 text-white px-4 py-2 rounded-full text-sm">
                 Abra sua conta
               </button>
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -43,11 +44,11 @@ export default function Navbar() {
               <RxEnter size={18} className="text-orange-600 group-hover:translate-x-1 transition" />
             </button>
           </a>
-          <a href="#abrir_conta">
+          <Link to="/abrir-conta">
             <button className="cursor-pointer bg-gradient-to-r from-orange-400 to-orange-600 text-white px-4 py-2 rounded-full hover:from-orange-500 hover:to-orange-700 transition">
               Abra sua conta
             </button>
-          </a>
+          </Link>
         </div>
 
         {/* Ícone menu mobile */}
