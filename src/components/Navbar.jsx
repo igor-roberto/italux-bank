@@ -38,12 +38,13 @@ export default function Navbar() {
 
         {/* Botões (desktop) */}
         <div className="hidden md:flex gap-4 items-center">
-          <a href="#acesse_conta">
-            <button className="group flex items-center gap-2 text-black font-medium cursor-pointer">
-              Acesse sua conta
-              <RxEnter size={18} className="text-orange-600 group-hover:translate-x-1 transition" />
-            </button>
-          </a>
+            <Link to="/acessar-conta">
+              <button className="group flex items-center gap-2 text-black font-medium cursor-pointer">
+                Acesse sua conta
+                <RxEnter size={18} className="text-orange-600 group-hover:translate-x-1 transition" />
+              </button>
+            </ Link>
+
           <Link to="/abrir-conta">
             <button className="cursor-pointer bg-gradient-to-r from-orange-400 to-orange-600 text-white px-4 py-2 rounded-full hover:from-orange-500 hover:to-orange-700 transition">
               Abra sua conta

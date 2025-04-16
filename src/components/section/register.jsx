@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { FaLongArrowAltLeft } from "react-icons/fa";
 
 
 export default function FormPage() {
@@ -71,12 +72,13 @@ export default function FormPage() {
     };
 
     return (
+        
         <div className="min-h-screen bg-white">
-
+            
             {/* Barra de navegação */}
             <div className="bg-white shadow z-50 py-4">
                 
-                <div className="max-w-7xl mx-auto px-4 flex items-center justify-start">
+                <div className="max-w-7xl mx-auto px-4 flex items-center justify-center md:justify-start">
                     <Link to='/'>
                     <span className="text-3xl tracking-tight  cursor-pointer">
                         <span className="text-black font-bold">ita</span>
@@ -85,7 +87,7 @@ export default function FormPage() {
                     </Link>
                 </div>
             </div>
-
+            
             {/* Formulário */}
             <div className="p-4">
                 <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-8 space-y-4">
