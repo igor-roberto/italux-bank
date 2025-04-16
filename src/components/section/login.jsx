@@ -59,11 +59,11 @@ export default function LogIn() {
                 </div>
             </div>
             {/* btn voltar */}
-            <div className="mt-8 flex justify-start px-4 group hidden md:flex">
+            {/* <div className="mt-8 flex justify-start px-4 group hidden md:flex">
             <Link to='/'>   
                 <button className="py-2 px-5 rounded-full bg-orange-500 cursor-pointer text-white flex items-center gap-2"><FaLongArrowAltLeft size={18} className="transform group-hover:translate-x-1 transition"/>Voltar</button>
             </Link> 
-            </div>
+            </div> */}
             {/* formulário */}
             <div className="pt-4">
                 <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-8 space-y-4">
