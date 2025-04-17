@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FaLongArrowAltLeft } from "react-icons/fa";
+import { FaCheckCircle, FaTimes } from "react-icons/fa";
+import { IoIosArrowRoundForward } from "react-icons/io";
 
 
 export default function FormPage() {
@@ -15,6 +16,8 @@ export default function FormPage() {
         senha: '',
         confirmSenha: '',
     });
+
+    const [cadastroConcluido, setCadastroConcluido] = useState(false);
 
     const [errors, setErrors] = useState({});
 
@@ -68,6 +71,20 @@ export default function FormPage() {
         if (Object.keys(validationErrors).length === 0) {
             console.log('Formulário enviado:', formData);
             // Aqui você pode redirecionar ou enviar para a API
+
+            setCadastroConcluido(true); //Mostra msg
+
+            //Limpando campo após os envios
+            setFormData({
+                nome: '',
+                cpf: '',
+                nascimento: '',
+                telefone: '',
+                email: '',
+                confirmEmail: '',
+                senha: '',
+                confirmSenha: '',
+            });
         }
     };
 
@@ -128,6 +145,25 @@ export default function FormPage() {
                         Enviar informações!
                     </button>
                 </form>
+                {cadastroConcluido && (
+                    <div className="fixed inset-0 flex items-center justify-center bg-[rgba(0,0,0,0.4)] z-50 animate-fadeIn">
+                        <div className="bg-white rounded-lg shadow-lg p-6 w-[90%] max-w-md relative">
+                            <button
+                                onClick={() => setCadastroConcluido(false)}
+                                className="absolute top-2 right-2 text-gray-500 hover:text-red-500 text-xl font-bold">
+                                <FaTimes className='cursor-pointer'/>    
+
+                            </button>
+                            <div className="flex flex-col items-center text-center">
+                                <FaCheckCircle className="text-green-500 text-4xl mb-2" />
+                                <h2 className="text-green-700 text-xl font-semibold">Cadastro concluído com sucesso!</h2>
+                                <Link to='/acessar-conta'>
+                                    <p className="font-bold text-gray-600 mt-1 text-sm cursor-pointer flex items-center hover:text-black transition-all">Fazer login<IoIosArrowRoundForward className='hover:text-black' size={18}/></p>
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
 
         </div>

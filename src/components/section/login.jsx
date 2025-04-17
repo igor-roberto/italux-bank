@@ -88,17 +88,19 @@ export default function LogIn() {
                         className={`w-full px-4 py-2 bg-gray-200 rounded-md border ${errors.senha ? 'border-red-500' : 'border-transparent'}`}
                     />
                     {errors.senha && <p className="text-red-500 text-sm mt-1">{errors.senha}</p>}
-                    <div className="text-right pr-2">
-                        <Link to='/abrir-conta'>
-                            <h1 className="underline text-blue-700">Ainda não tenho conta!</h1>
-                        </Link>
-                    </div>
+
                     <button
                         type="submit"
                         className="w-full bg-orange-500 text-white py-2 rounded-full hover:bg-orange-600 transition-all cursor-pointer"
                     >
                         Entrar
                     </button>
+
+                    <div className="text-right pr-2">
+                        <Link to='/abrir-conta'>
+                            <h1 className="underline text-blue-700">Ainda não tenho conta!</h1>
+                        </Link>
+                    </div>
                 </form>
             </div>
         </div>
