@@ -63,28 +63,50 @@ export default function FormPage() {
         return newErrors;
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const validationErrors = validate();
         setErrors(validationErrors);
-
+    
         if (Object.keys(validationErrors).length === 0) {
-            console.log('Formulário enviado:', formData);
-            // Aqui você pode redirecionar ou enviar para a API
-
-            setCadastroConcluido(true); //Mostra msg
-
-            //Limpando campo após os envios
-            setFormData({
-                nome: '',
-                cpf: '',
-                nascimento: '',
-                telefone: '',
-                email: '',
-                confirmEmail: '',
-                senha: '',
-                confirmSenha: '',
-            });
+            try {
+                const response = await fetch("http://localhost:8000/register", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        nome: formData.nome,
+                        cpf: formData.cpf.replace(/\D/g, ''), // remove pontos e traços
+                        nascimento: formData.nascimento,
+                        telefone: formData.telefone,
+                        email: formData.email,
+                        senha: formData.senha
+                    })
+                });
+    
+                if (response.ok) {
+                    setCadastroConcluido(true); // mostra mensagem de sucesso
+                    setFormData({
+                        nome: '',
+                        cpf: '',
+                        nascimento: '',
+                        telefone: '',
+                        email: '',
+                        confirmEmail: '',
+                        senha: '',
+                        confirmSenha: '',
+                    });
+                } else {
+                    const errorData = await response.json();
+                    console.error("Erro ao cadastrar:", errorData.detail);
+                    alert("Erro ao cadastrar: " + errorData.detail);
+                }
+    
+            } catch (error) {
+                console.error("Erro na requisição:", error);
+                alert("Erro na conexão com o servidor");
+            }
         }
     };
 

@@ -25,25 +25,55 @@ export default function LogIn() {
         setFormData({ ...formData, [name]: maskedValue });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
         const newErrors = {};
-
+    
         if (formData.cpf.length < 14) {
             newErrors.cpf = 'CPF inválido';
         }
-
+    
         if (!formData.senha) {
             newErrors.senha = 'Senha é obrigatória';
         }
-
+    
         setErrors(newErrors);
-
+    
         if (Object.keys(newErrors).length === 0) {
-            console.log('Login enviado:', formData);
+            try {
+                const response = await fetch("http://localhost:8000/login", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        cpf: formData.cpf.replace(/\D/g, ''), // remove . e -
+                        senha: formData.senha
+                    })
+                });
+    
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log("Login bem-sucedido!", data);
+    
+                    // Salvar token no localStorage, se usar JWT
+                    // localStorage.setItem("token", data.access_token);
+    
+                    // Redirecionar ou mostrar mensagem
+                    alert("Login realizado com sucesso!");
+                } else {
+                    const errorData = await response.json();
+                    alert("Erro no login: " + errorData.detail);
+                }
+    
+            } catch (error) {
+                console.error("Erro na requisição:", error);
+                alert("Erro na conexão com o servidor");
+            }
         }
     };
+    
 
     return (
         <div className="min-h-screen bg-white">
